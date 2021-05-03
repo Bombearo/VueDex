@@ -1,17 +1,48 @@
 <template>
   <div class="pokemon">
-    <h1>TEST</h1>
+    <li v-for="pokemon in pokemonList" :key="pokemon.name">
+
+      {{ pokemon.name }}
+    </li>
   </div>
 </template>
 
 <script>
-
-
 export default {
   name: 'Pokemon',
+    data() {
+    return {
+        pokemonList: [],
+    };
+    },
   props: {
-    msg: String
-  }
+    start:Number,
+    end:Number
+  },
+  methods:{
+    getPokemonList(start,end) {
+      //Get the list      
+      const Pokedex = require("pokeapi-js-wrapper")
+      const P = new Pokedex.Pokedex()
+
+      const interval = {
+        offset: start,
+        limit: end,
+      }
+      P.getPokemonsList(interval).then((response) =>{
+        
+        this.pokemonList = response["results"];
+        console.log(response);
+      })
+
+
+    },
+
+  },
+    created() {
+      return this.getPokemonList(this.start,this.end);
+    }
+  
 }
 </script>
 

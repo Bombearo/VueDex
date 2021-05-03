@@ -1,22 +1,13 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Welcome to Your Vue.js App"/>
-  <Pokemon/>
+  <Pokemon v-bind:start="0" v-bind:end="50" />
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 import Pokemon from './components/Pokemon.vue'
 
-const Pokedex = require("pokeapi-js-wrapper")
-const P = new Pokedex.Pokedex()
-const interval = {
-  offset: 34,
-  limit: 10,
-}
-P.getPokemonsList(interval).then(function(response) {
-  console.log(response)
-})
 
 export default {
   name: 'App',
