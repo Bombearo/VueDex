@@ -1,19 +1,16 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-  <Pokemon v-bind:start="0" v-bind:end="50" />
+  <PokemonList :start="0" :end="20" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import Pokemon from './components/Pokemon.vue'
+import PokemonList from './components/PokemonList.vue'
 
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
-    Pokemon
+    PokemonList
   }
 }
 </script>
@@ -26,5 +23,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  margin: auto;
 }
 </style>
