@@ -1,6 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <PokemonList :start="0" :end="20" />
+  <PokemonList :start="0" :end="60" />
 </template>
 
 <script>

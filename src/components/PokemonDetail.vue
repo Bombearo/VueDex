@@ -1,13 +1,13 @@
 <template>
   <div class="pokemonDetail">
     <div class="sprite">
-        <img :alt="pokemonDetail.name">
+        <img :src="sprite" :alt="pokemonDetail['name']">
     </div>
     <div class="name"> <h1>{{pokemonDetail['name']}}</h1></div>
     <div class="pokedex_number">{{pokemonDetail['id']}}</div>
     <div class="abilities">
         <ul>
-            <li v-for="ability in pokemonDetail['abilities']" :key="ability.ability">
+            <li v-for="ability in abilities" :key="ability.ability">
                 {{ability.ability.name}}
             </li>
 
@@ -24,6 +24,8 @@ export default {
     data() {
     return {
         pokemonDetail:{},
+        abilities:{},
+        sprite:String
     };
     },
   props: {
@@ -35,10 +37,11 @@ export default {
       const Pokedex = require("pokeapi-js-wrapper")
       const P = new Pokedex.Pokedex()
       P.getPokemonByName(name).then((response) =>{
-        console.log(response);
         this.pokemonDetail = response;
-        let a = response['sprites']
-        console.log(a);
+        let sprite = response['sprites']['front_default']
+        this.sprite = sprite;
+        let abilities = response['abilities']
+        this.abilities = abilities
       })
 
 
@@ -78,6 +81,20 @@ a {
     width:20vw;
     padding: 2vw;
 }
+@media screen and (max-width:1200px) {
+    .pokemonDetail{
+    width:40vw;
+    padding: 2vw;
+}
+}
+@media screen and (max-width:600px) {
+    .pokemonDetail{
+    width:100%;
+    padding: 2vw;
+}
+}
+
+
 .sprite{
     grid-area:sprite;
 }
