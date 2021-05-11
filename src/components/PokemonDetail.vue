@@ -1,7 +1,7 @@
 <template>
   <div class="pokemonDetail">
     <div class="sprite">
-        <img :src="sprite" :alt="pokemonDetail['name']">
+        <router-link :to="'/'+pokemonDetail['name']"><img :src="sprite" :alt="pokemonDetail['name']"></router-link>
     </div>
     <div class="name"> <h1>{{pokemonDetail['name']}}</h1></div>
     <div class="pokedex_number">{{pokemonDetail['id']}}</div>

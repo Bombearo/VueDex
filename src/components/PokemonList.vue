@@ -16,7 +16,7 @@ export default {
     },
   props: {
     start:Number,
-    end:Number
+    num_pokemon:Number
   },
   components:{
     PokemonDetail
@@ -45,7 +45,7 @@ export default {
 
   },
     created() {
-      return this.getPokemonList(this.start,this.end);
+      return this.getPokemonList(this.start,this.num_pokemon);
     }
   
 }

@@ -1,18 +1,19 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+      <PokemonList v-bind:start="100" v-bind:num_pokemon="60" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+
+import PokemonList from '@/components/PokemonList.vue'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    PokemonList
   }
 }
 </script>
