@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-      <PokemonList v-bind:start="100" v-bind:num_pokemon="60" />
+      <PokemonList v-bind:start="210" v-bind:num_pokemon="60" />
   </div>
 </template>
 

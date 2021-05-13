@@ -1,7 +1,9 @@
 <template>
   <div class="pokemonDetail">
     <div class="sprite">
-        <router-link :to="'/'+pokemonDetail['name']"><img :src="sprite" :alt="pokemonDetail['name']"></router-link>
+        <router-link :to="'/'">
+        <img :src="sprite" :alt="pokemonDetail['name']">
+        </router-link>
     </div>
     <div class="name"> <h1>{{pokemonDetail['name']}}</h1></div>
     <div class="pokedex_number">{{pokemonDetail['id']}}</div>
@@ -33,10 +35,8 @@ export default {
   },
   methods:{
     getPokemon(name) {
-      //Get the list      
-      const Pokedex = require("pokeapi-js-wrapper")
-      const P = new Pokedex.Pokedex()
-      P.getPokemonByName(name).then((response) =>{
+      //Get the list
+      this.dex.getPokemonByName(name).then((response) =>{
         this.pokemonDetail = response;
         let sprite = response['sprites']['front_default']
         this.sprite = sprite;
@@ -49,7 +49,6 @@ export default {
 
   },
     created() {
-        console.log(this.name)
       return this.getPokemon(this.name);
     }
   

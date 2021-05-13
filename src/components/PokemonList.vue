@@ -1,6 +1,6 @@
 <template>
   <div class="pokemonList">
-    <PokemonDetail :id ="pokemon.name" :name ="pokemon.name" v-for="pokemon in pokemonList" :key="pokemon.name" />
+    <PokemonDetail :id ="pokemon.name" :name ="pokemon.name" v-for="pokemon in pokemonList" :key="pokemon.name"/>
   </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
   name: 'PokemonList',
     data() {
     return {
-        pokemonList: [],
+        pokemonList: []
     };
     },
   props: {
@@ -24,24 +24,18 @@ export default {
   methods:{
     getPokemonList(start,end) {
       //Get the list      
-      const Pokedex = require("pokeapi-js-wrapper")
-      const P = new Pokedex.Pokedex()
-
       const interval = {
         offset: start,
-        limit: end,
+        limit: end
       }
-      P.getPokemonsList(interval).then((response) =>{
+      console.log(this.dex)
+      this.dex.getPokemonsList(interval).then((response) =>{
         
         this.pokemonList = response["results"];
-        console.log(this.pokemonList);
-        this.pokemonList.forEach(element => {
-          console.log(element);
-        });
       })
 
 
-    },
+    }
 
   },
     created() {
