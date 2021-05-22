@@ -31,7 +31,7 @@ export default {
       console.log(this.dex)
       this.dex.getPokemonsList(interval).then((response) =>{
         
-        this.pokemonList = response["results"];
+      this.pokemonList = response["results"];
       })
 
 
@@ -65,5 +65,7 @@ a {
 .pokemonList{
   display:flex;
   flex-wrap: wrap;
+  width:90%;
+  margin:auto;
 }
 </style>

@@ -45,8 +45,7 @@ export default {
       })
 
 
-    },
-
+    }
   },
     created() {
       return this.getPokemon(this.name);
@@ -77,12 +76,15 @@ a {
     grid-template-areas: "sprite sprite"
     " name id"
     " name ability";
-    width:20vw;
-    padding: 2vw;
+    width:20%;
+    padding: 2%;
+    margin:1vw auto;
+    border: #42b983 10px solid;
+    border-radius: 20%;
 }
 @media screen and (max-width:1200px) {
     .pokemonDetail{
-    width:40vw;
+    width:30vw;
     padding: 2vw;
 }
 }
@@ -104,7 +106,9 @@ a {
 
 .name{
     grid-area: name;
-
+    border-right:#42b983 1px dashed;
+    padding-right:2vw;
+    text-transform: capitalize;
 }
 
 .pokedex_number{

@@ -11,7 +11,7 @@
 import PokemonList from '@/components/PokemonList.vue'
 
 export default {
-  name: 'Home',
+  name: 'PokemonDetails',
   components: {
     PokemonList
   }
