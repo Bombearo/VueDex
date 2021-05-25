@@ -1,7 +1,7 @@
 <template>
   <div class="pokemonDetail">
     <div class="sprite">
-        <router-link :to="'/'">
+        <router-link :to="'/pokemon/'+pokemonDetail['name']">
         <img :src="sprite" :alt="pokemonDetail['name']">
         </router-link>
     </div>
@@ -38,10 +38,8 @@ export default {
       //Get the list
       this.dex.getPokemonByName(name).then((response) =>{
         this.pokemonDetail = response;
-        let sprite = response['sprites']['front_default']
-        this.sprite = sprite;
-        let abilities = response['abilities']
-        this.abilities = abilities
+        this.sprite = response['sprites']['front_default']
+        this.abilities = response['abilities']
       })
 
 

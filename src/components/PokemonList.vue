@@ -9,11 +9,12 @@ import PokemonDetail from './PokemonDetail.vue'
 export default {
   
   name: 'PokemonList',
-    data() {
-    return {
-        pokemonList: []
-    };
-    },
+  data(){
+    return{
+      pokemonList:[]
+    }
+
+  },
   props: {
     start:Number,
     num_pokemon:Number
@@ -23,25 +24,27 @@ export default {
   },
   methods:{
     getPokemonList(start,end) {
-      //Get the list      
+      //Get the list
+      this.pokemonList=[]
       const interval = {
         offset: start,
         limit: end
       }
-      console.log(this.dex)
       this.dex.getPokemonsList(interval).then((response) =>{
         
       this.pokemonList = response["results"];
       })
-
-
     }
-
   },
-    created() {
-      return this.getPokemonList(this.start,this.num_pokemon);
+  watch:{
+    start(){
+      this.getPokemonList(this.start,this.num_pokemon)
     }
-  
+  },
+  created() {
+    return this.getPokemonList(this.start,this.num_pokemon);
+  }
+
 }
 </script>
 
