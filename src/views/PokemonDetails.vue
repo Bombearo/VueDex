@@ -1,21 +1,21 @@
 <template>
   <div class="home">
     <h1>{{$route.params.name}}</h1>
-    <PokemonDetail :id ="$route.params.name" :name ="$route.params.name" class="condensedDetails"/>
-    <Generation :name ="$route.params.name"/>
+    <Pokemon :id ="$route.params.name" :name ="$route.params.name" class="condensedDetails"/>
+    <PokeStats :name ="$route.params.name"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import PokemonDetail from '@/components/PokemonDetail.vue'
-import Generation from '@/components/Generation.vue'
+import Pokemon from '@/components/Pokemon.vue'
+import PokeStats from '@/components/PokeStats.vue'
 
 export default {
   name: 'PokemonDetails',
   components:{
-    PokemonDetail,
-    Generation
+    Pokemon,
+    PokeStats
   }
 }
 </script>
