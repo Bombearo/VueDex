@@ -1,8 +1,7 @@
 <template>
   <div>
     <h1></h1>
-    <p v-for="version in game_indices" :key="version">{{version.name}}</p>
-    <p>{{hp}}</p>
+    <p>{{stats}}</p>
   </div>
 </template>
 
@@ -11,14 +10,13 @@ export default {
   name: "PokeStats",
   data(){
     return{
-      pokemon:{},
-      game_indices:[],
-      hp:0,
-      attack:0,
-      defense:0,
-      spAttack:0,
-      spDefense:0,
-      speed:0
+      stats:{},
+      evs:{},
+      eggGroups:{},
+      captureRate:0,
+      base_happiness:0,
+      evolutions:{},
+      flavourText:{}
 
     }
   },
@@ -26,37 +24,73 @@ export default {
     name:String
   },
   methods: {
-    getPokemon(name) {
+    getStats(name) {
+      let {hp,attack,defense,spAttack,spDefense,speed} = ''
       this.dex.getPokemonByName(name).then((response) => {
-        this.pokemon = response;
-        console.log(response)
-        response.stats.map(stat=>{
-          switch(stat.stat.name){
-            case "hp":
-              this.hp = stat['base_stat'];
-              break;
-            case "attack":
-              this.attack = stat.base_stat;
-              break;
-            case "defense":
-              this.defense = stat.base_stat;
-              break;
-            case "special-attack":
-              this.spAttack = stat.base_stat;
-              break;
-            case "special-defense":
-              this.spDefense = stat.base_stat;
-              break;
-            case "speed":
-              this.speed = stat.base_stat;
-              break;
+        response.stats.map(stat => {
+              switch (stat.stat.name) {
+                case "hp":
+                  hp = stat['base_stat'];
+                  break;
+                case "attack":
+                  attack = stat['base_stat'];
+                  break;
+                case "defense":
+                  defense = stat['base_stat'];
+                  break;
+                case "special-attack":
+                  spAttack = stat['base_stat'];
+                  break;
+                case "special-defense":
+                  spDefense = stat['base_stat'];
+                  break;
+                case "speed":
+                  speed = stat['base_stat'];
+                  break;
 
 
-        }
-        }
+              }
+            }
         )
-      })
+        this.stats = {hp,attack,defense,spAttack,spDefense,speed}
 
+        this.evs = response.stats.filter(stat=>{
+          return stat.effort > 0}).map(stat=>{
+          return this.uppercase(`${stat.effort} ${stat.stat.name}`)
+        })
+            .join(', ')
+          }
+      )
+
+
+    },
+    getPokemon(name) {
+      this.getStats(name)
+      this.getSpeciesDetails(name)
+    },
+    uppercase(name){
+      return name.toLowerCase()
+      .split('-')
+      .map(s =>s.charAt(0).toUpperCase() + s.substring(1))
+      .join(' ')
+    },
+    getSpeciesDetails(name) {
+      let evoChain = ''
+      this.dex.getPokemonSpeciesByName(name).then(response=>{
+        this.flavourText = response.flavor_text_entries.filter(text=>{
+        return text.language.name === 'en'}
+        ).map(version=>{
+          return {"versionName":version.version.name,"flavourText":version.flavor_text}
+        })
+        evoChain = response.evolution_chain.url
+        if (evoChain){
+          this.dex.resource(evoChain).then(response=>{
+            if (response.chain.evolves_to.length > 0){
+              console.log(response)
+            }
+          })
+        }
+      })
 
     }
   },
